@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Name · Gameplay Programmer</title>
+  <meta name="description" content="Portfolio of a gameplay programmer: Unity, C#, shipped Steam demo and game jam projects.">
+  <meta name="theme-color" content="#0c0c0e">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="intro-lock">
+
+  <!-- INTRO: cycles still frames of you turning around, with a warp/bounce between frames -->
+  <div id="intro" class="intro" role="presentation">
+    <div class="intro-figure" id="intro-figure">
+      <img id="intro-frame" alt="" hidden>
+      <div id="intro-placeholder" class="intro-placeholder">
+        <svg viewBox="0 0 120 300" aria-hidden="true">
+          <circle cx="60" cy="42" r="26"/>
+          <path d="M30 84h60l10 120H76l-4 90H48l-4-90H20z"/>
+        </svg>
+        <p>Your cutout frames go in<br><code>assets/intro/</code></p>
+      </div>
+    </div>
+    <p class="intro-name gradient-text" data-cfg="name">Your Name</p>
+    <button id="intro-skip" class="intro-skip" type="button">Skip intro</button>
+  </div>
+
+  <!-- Minimalist drifting background shapes -->
+  <div class="bg-shapes" aria-hidden="true">
+    <span class="shape ring ring-a"></span>
+    <span class="shape ring ring-b"></span>
+    <span class="shape grid-lines"></span>
+    <span class="shape tri tri-a"></span>
+    <span class="shape tri tri-b"></span>
+  </div>
+
+  <header class="nav">
+    <a class="nav-logo" href="#top" data-cfg="name">Your Name</a>
+    <nav aria-label="Primary">
+      <a href="#projects" data-nav="projects">Projects</a>
+      <a href="#skills" data-nav="skills">Skills</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="hero">
+      <p class="eyebrow reveal" style="--d:0"><span data-cfg="role">Gameplay Programmer</span></p>
+      <h1 class="gradient-text reveal" style="--d:1" data-cfg="name">Your Name</h1>
+      <p class="pitch reveal" style="--d:2" data-cfg="pitch">Your one-line pitch goes here.</p>
+      <div class="hero-cta reveal" style="--d:3">
+        <a class="btn btn-primary" href="#projects">See my work</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </section>
+
+    <section class="section" id="projects" data-section="projects">
+      <h2>Projects</h2>
+      <p class="section-sub">Click a card for the full overview, technical details and links.</p>
+      <div class="project-grid" id="project-grid"></div>
+    </section>
+
+    <section class="section" id="skills" data-section="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div>
+          <h3>Primary</h3>
+          <ul class="chips" id="skills-primary"></ul>
+        </div>
+        <div>
+          <h3>Learning</h3>
+          <ul class="chips chips-dim" id="skills-learning"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" data-section="about">
+      <h2>About</h2>
+      <p class="about-text" id="about-text"></p>
+    </section>
+
+    <section class="section" id="contact" data-section="contact">
+      <h2>Contact</h2>
+      <p class="section-sub">Open to junior gameplay programmer roles, internships and collaborations.</p>
+      <ul class="contact-links" id="contact-links"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> <span data-cfg="name">Your Name</span></p>
+  </footer>
+
+  <!-- PROJECT DETAIL OVERLAY -->
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-close></div>
+    <article class="modal-panel">
+      <button class="modal-close" type="button" data-close aria-label="Close project details">&times;</button>
+      <div id="modal-content"></div>
+    </article>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
