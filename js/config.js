@@ -1,11 +1,10 @@
 // Site-wide settings. Edit this file to personalise the site.
 window.SITE_CONFIG = {
-  name: "Your Name",
+  name: "Jeri Juntunen",
   role: "Gameplay Programmer",
-  pitch: "Your one-line pitch goes here.",
+  pitch: "Hieno one-lineri wauu oon niin siisti palkatkaa",
   about:
-    "A few sentences about you: where you study, what draws you to gameplay programming, " +
-    "and what you are working on right now.",
+    "Student at KAMK studying for a bachelors in Game Development" + ".",
 
   // Intro animation: 3-4 still images of you turning around.
   // Use transparent PNGs of the same height and canvas size so they line up.
@@ -29,10 +28,10 @@ window.SITE_CONFIG = {
 
   // Shown in the Contact section. Replace the URLs.
   links: [
-    { label: "Email", url: "mailto:you@example.com" },
-    { label: "GitHub", url: "https://github.com/" },
-    { label: "itch.io", url: "https://itch.io/" },
-    { label: "Steam", url: "https://store.steampowered.com/" },
-    { label: "LinkedIn", url: "https://www.linkedin.com/" }
+    { label: "Email", url: "mailto:jeri.juntunen@gmail.com" },
+    { label: "GitHub", url: "https://github.com/jerrychili" },
+    { label: "itch.io", url: "https://jerijuntunen.itch.io/" },
+    { label: "Steam", url: "https://steamcommunity.com/id/JerryChili" },
+    { label: "LinkedIn", url: "www.linkedin.com/in/jeri-j-82b56b28a" }
   ]
 };
