@@ -33,7 +33,19 @@
   }).join('');
 
   /* ---------- Project cards ---------- */
-  var grid = $('#project-grid');
+  var groupsEl = $('#project-groups');
+  var categories = window.PROJECT_CATEGORIES || [{ id: 'all', title: '', sub: '' }];
+  var gridFor = {};
+  categories.forEach(function (c) {
+    var has = projects.some(function (p) { return (p.category || categories[0].id) === c.id; });
+    if (!has) return;
+    var group = document.createElement('div');
+    group.className = 'project-group';
+    group.innerHTML = (c.title ? '<div class="group-head"><h3>' + esc(c.title) + '</h3>' + (c.sub ? '<p>' + esc(c.sub) + '</p>' : '') + '</div>' : '') +
+      '<div class="project-grid"></div>';
+    groupsEl.appendChild(group);
+    gridFor[c.id] = $('.project-grid', group);
+  });
 
   function thumbHTML(p) {
     var img = p.thumb
@@ -44,7 +56,7 @@
 
   projects.forEach(function (p) {
     var wrap = document.createElement('div');
-    wrap.className = 'card-wrap' + (p.featured ? ' featured' : '');
+    wrap.className = 'card-wrap';
 
     var tags = [p.engine, p.language].concat(p.tags || []).filter(Boolean).slice(0, 5);
     var a = document.createElement('a');
@@ -64,7 +76,7 @@
         '<span class="card-glare"></span>' +
       '</div>';
     wrap.appendChild(a);
-    grid.appendChild(wrap);
+    (gridFor[p.category] || gridFor[categories[0].id]).appendChild(wrap);
 
     if (canHover && !reduceMotion) {
       a.addEventListener('pointermove', function (e) {
@@ -218,25 +230,16 @@
     $$('[data-section]').forEach(function (s) { io.observe(s); });
   }
 
-  /* ---------- Intro: still frames with a warp/bounce between them ---------- */
-  var intro = $('#intro');
-  var figure = $('#intro-figure');
-  var frameImg = $('#intro-frame');
-  var placeholder = $('#intro-placeholder');
+  /* ---------- Hero portrait: still frames with a warp/bounce between them ---------- */
+  var figure = $('#hero-figure');
+  var frameImg = $('#hero-frame');
+  var placeholder = $('#hero-placeholder');
   var placeholderSvg = $('svg', placeholder);
-  var finished = false;
-  var timer = null;
-
-  function finishIntro() {
-    if (finished) return;
-    finished = true;
-    clearTimeout(timer);
-    try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
-    intro.classList.add('hide');
-    document.body.classList.remove('intro-lock');
-    document.body.classList.add('loaded');
-    setTimeout(function () { intro.remove(); }, 900);
-  }
+  var hero = cfg.hero;
+  var heroTimer = null;
+  var playing = false;
+  var usable = false;
+  var widths = [1, 0.62, 0.34, 0.7, 1]; // fake "turning" for the placeholder
 
   function preload(src) {
     return new Promise(function (resolve) {
@@ -253,52 +256,45 @@
     if (!figure.animate) return;
     var glow = GLOW[i % GLOW.length];
     figure.animate([
-      { transform: 'scale(0.90, 1.07) skewX(-6deg)', filter: 'blur(3px) drop-shadow(0 0 0 ' + glow + ')', offset: 0 },
-      { transform: 'scale(1.06, 0.96) skewX(3deg)', filter: 'blur(0) drop-shadow(0 0 26px ' + glow + ')', offset: 0.45 },
+      { transform: 'scale(0.92, 1.06) skewX(-6deg)', filter: 'blur(3px) drop-shadow(0 0 0 ' + glow + ')', offset: 0 },
+      { transform: 'scale(1.05, 0.97) skewX(3deg)', filter: 'blur(0) drop-shadow(0 0 24px ' + glow + ')', offset: 0.45 },
       { transform: 'scale(0.99, 1.01) skewX(-1deg)', offset: 0.75 },
-      { transform: 'scale(1, 1) skewX(0)', filter: 'drop-shadow(0 0 8px ' + glow + ')', offset: 1 }
-    ], { duration: 520, easing: 'cubic-bezier(.3, 1.4, .5, 1)', fill: 'forwards' });
+      { transform: 'scale(1, 1) skewX(0)', filter: 'drop-shadow(0 0 0 transparent)', offset: 1 }
+    ], { duration: 520, easing: 'cubic-bezier(.3, 1.4, .5, 1)' });
   }
 
-  function startIntro(frames, usable) {
-    var n = usable ? frames.length : 4;
-    var widths = [1, 0.62, 0.34, 0.7]; // fake "turning" widths for the placeholder
-    var i = 0;
+  function showFrame(i) {
+    if (usable) frameImg.src = hero.frames[i];
+    else placeholderSvg.style.transform = 'scaleX(' + widths[i % widths.length] + ')';
+  }
 
+  function lastIndex() { return (usable ? hero.frames.length : widths.length) - 1; }
+
+  function playHero() {
+    if (playing) return;
+    playing = true;
+    var i = 0, last = lastIndex();
+    (function step() {
+      showFrame(i);
+      bounce(i);
+      if (i >= last) { playing = false; return; }
+      i++;
+      heroTimer = setTimeout(step, hero.frameMs);
+    })();
+  }
+
+  Promise.all(hero.frames.map(preload)).then(function (ok) {
+    usable = ok.length > 0 && ok.every(Boolean);
     frameImg.hidden = !usable;
     placeholder.hidden = usable;
+    if (reduceMotion) { showFrame(lastIndex()); return; }   // no animation: just show the final pose
+    showFrame(0);
+    heroTimer = setTimeout(playHero, hero.startDelayMs);
+    figure.addEventListener('click', playHero);
+    if (canHover) figure.addEventListener('pointerenter', playHero);
+  });
 
-    function step() {
-      if (finished) return;
-      if (usable) frameImg.src = frames[i];
-      else placeholderSvg.style.transform = 'scaleX(' + widths[i % widths.length] + ')';
-      bounce(i);
-      i++;
-      timer = setTimeout(i < n ? step : function () { timer = setTimeout(finishIntro, cfg.intro.endHoldMs); }, cfg.intro.frameMs);
-    }
-    step();
-  }
-
-  var seen = false;
-  try { seen = sessionStorage.getItem('introSeen') === '1'; } catch (e) {}
-  var forced = /[?&]intro\b/.test(location.search);
-  var deepLink = /^#project=/.test(location.hash); // shared project links should not wait for the intro
-  var show = cfg.intro.enabled && !reduceMotion && !deepLink && (forced || cfg.intro.playEveryVisit || !seen);
-
-  $('#intro-skip').addEventListener('click', finishIntro);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !finished && show) finishIntro(); });
-
-  if (show) {
-    Promise.all(cfg.intro.frames.map(preload)).then(function (ok) {
-      var usable = ok.length > 0 && ok.every(Boolean);
-      startIntro(cfg.intro.frames, usable);
-    });
-  } else {
-    finished = true;
-    intro.remove();
-    document.body.classList.remove('intro-lock');
-    document.body.classList.add('loaded');
-  }
+  document.body.classList.add('loaded');
 
   route(); // open a project if the page was loaded with #project=<id>
 })();

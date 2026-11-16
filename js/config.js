@@ -2,23 +2,22 @@
 window.SITE_CONFIG = {
   name: "Jeri Juntunen",
   role: "Gameplay Programmer",
-  pitch: "Hieno one-lineri wauu oon niin siisti palkatkaa",
+  pitch: "Programming is my art, the IDE is my canvas.",
   about:
-    "Student at KAMK studying for a bachelors in Game Development" + ".",
+    "I am a game developer from Finland who is currently studying for a bachelors degree in Game Programming. I have always been drawn to the kind of programming you can feel in the gameplay.",
 
-  // Intro animation: 3-4 still images of you turning around.
-  // Use transparent PNGs of the same height and canvas size so they line up.
-  intro: {
-    enabled: true,
+  // Hero portrait: 3-4 still frames of you (waist-up cutout, transparent PNG, same canvas size).
+  // They play once when the page loads with a warp/bounce between frames, then settle on the LAST frame.
+  // Hover or click the portrait to replay it.
+  hero: {
     frames: [
-      "assets/intro/frame1.png",
-      "assets/intro/frame2.png",
-      "assets/intro/frame3.png",
-      "assets/intro/frame4.png"
+      "assets/hero/frame1.png",
+      "assets/hero/frame2.png",
+      "assets/hero/frame3.png",
+      "assets/hero/frame4.png"
     ],
-    frameMs: 650,      // how long each frame is shown
-    endHoldMs: 900,    // pause on the last frame before the page appears
-    playEveryVisit: false // false = once per browser session
+    startDelayMs: 700, // wait before the first frame change (lets the page fade in)
+    frameMs: 600       // how long each frame is shown
   },
 
   skills: {
@@ -32,6 +31,6 @@ window.SITE_CONFIG = {
     { label: "GitHub", url: "https://github.com/jerrychili" },
     { label: "itch.io", url: "https://jerijuntunen.itch.io/" },
     { label: "Steam", url: "https://steamcommunity.com/id/JerryChili" },
-    { label: "LinkedIn", url: "www.linkedin.com/in/jeri-j-82b56b28a" }
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/jeri-j-82b56b28a" }
   ]
 };

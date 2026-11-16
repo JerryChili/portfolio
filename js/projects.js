@@ -16,10 +16,18 @@
 //   responsibilities  array of strings
 //   technical   array of { title, text }: systems you built
 //   links       array of { label, url, primary? }
-//   featured    true = wider card
+//   category    which group it appears in: an id from PROJECT_CATEGORIES below
+// Groups shown on the site, in order. A group with no projects is hidden.
+// Want a third group? Add e.g. { id: "jams", title: "Game jams", sub: "..." } and use that id as a project's category.
+window.PROJECT_CATEGORIES = [
+  { id: "shipped", title: "Shipped projects", sub: "Released games and demos" },
+  { id: "other",   title: "Other projects",   sub: "Game jams, prototypes and experiments" }
+];
+
 window.PROJECTS = [
   {
     id: "steam-demo",
+    category: "shipped",
     title: "Your Steam Game",
     hook: "One sentence that makes someone want to play it.",
     status: "Steam Demo",
@@ -33,7 +41,6 @@ window.PROJECTS = [
     year: "2026",
     team: "Team of 4",
     duration: "6 months",
-    featured: true,
     overview: [
       "Describe the game: genre, core loop, and what makes it interesting.",
       "Describe the project's story: how it started, where it shipped, what you learned."
@@ -54,6 +61,7 @@ window.PROJECTS = [
   },
   {
     id: "jam-game",
+    category: "other",
     title: "Your Game Jam Entry",
     hook: "Built in 48 hours around the theme of ...",
     status: "Game Jam",
@@ -76,6 +84,7 @@ window.PROJECTS = [
   },
   {
     id: "itch-prototype",
+    category: "other",
     title: "Your itch.io Prototype",
     hook: "A small experiment with an interesting mechanic.",
     status: "Prototype",

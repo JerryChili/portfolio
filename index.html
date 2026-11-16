@@ -3,31 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jeri Juntunen · Gameplay Programmer</title>
-  <meta name="description" content="Portfolio of Jeri Juntunen: Unity, C#, shipped Steam demo and game jam projects.">
+  <title>Your Name · Gameplay Programmer</title>
+  <meta name="description" content="Portfolio of a gameplay programmer: Unity, C#, shipped Steam demo and game jam projects.">
   <meta name="theme-color" content="#0c0c0e">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="intro-lock">
-
-  <!-- INTRO: cycles still frames of you turning around, with a warp/bounce between frames -->
-  <div id="intro" class="intro" role="presentation">
-    <div class="intro-figure" id="intro-figure">
-      <img id="intro-frame" alt="" hidden>
-      <div id="intro-placeholder" class="intro-placeholder">
-        <svg viewBox="0 0 120 300" aria-hidden="true">
-          <circle cx="60" cy="42" r="26"/>
-          <path d="M30 84h60l10 120H76l-4 90H48l-4-90H20z"/>
-        </svg>
-        <p>WORK IN PROGRESS: <br><code>assets/intro/</code></p>
-      </div>
-    </div>
-    <p class="intro-name gradient-text" data-cfg="name">Jeri Juntunen</p>
-    <button id="intro-skip" class="intro-skip" type="button">Skip intro</button>
-  </div>
+<body>
 
   <!-- Minimalist drifting background shapes -->
   <div class="bg-shapes" aria-hidden="true">
@@ -39,7 +23,7 @@
   </div>
 
   <header class="nav">
-    <a class="nav-logo" href="#top" data-cfg="name">Jeri Juntunen</a>
+    <a class="nav-logo" href="#top" data-cfg="name">Your Name</a>
     <nav aria-label="Primary">
       <a href="#projects" data-nav="projects">Projects</a>
       <a href="#skills" data-nav="skills">Skills</a>
@@ -50,10 +34,23 @@
 
   <main id="top">
     <section class="hero" id="hero">
-      <p class="eyebrow reveal" style="--d:0"><span data-cfg="role">Gameplay Programmer</span></p>
-      <h1 class="gradient-text reveal" style="--d:1" data-cfg="name">Jeri Juntunen</h1>
-      <p class="pitch reveal" style="--d:2" data-cfg="pitch">Hieno one-liner tähän kohtaan wau oon niin siisti</p>
-      <div class="hero-cta reveal" style="--d:3">
+      <!-- Waist-up cutout. Cycles still frames with a warp/bounce, see js/config.js -> hero -->
+      <div class="hero-portrait reveal" style="--d:0">
+        <div class="hero-figure" id="hero-figure">
+          <img id="hero-frame" alt="" hidden>
+          <div id="hero-placeholder" class="hero-placeholder">
+            <svg viewBox="0 0 160 200" aria-hidden="true">
+              <circle cx="80" cy="64" r="36"/>
+              <path d="M16 200c0-46 28-72 64-72s64 26 64 72z"/>
+            </svg>
+            <p>Your cutout frames go in <code>assets/hero/</code></p>
+          </div>
+        </div>
+      </div>
+      <h1 class="gradient-text reveal" style="--d:1" data-cfg="name">Your Name</h1>
+      <p class="eyebrow reveal" style="--d:2"><span data-cfg="role">Gameplay Programmer</span></p>
+      <p class="pitch reveal" style="--d:3" data-cfg="pitch">Your one-line pitch goes here.</p>
+      <div class="hero-cta reveal" style="--d:4">
         <a class="btn btn-primary" href="#projects">See my work</a>
         <a class="btn" href="#contact">Get in touch</a>
       </div>
@@ -62,7 +59,7 @@
     <section class="section" id="projects" data-section="projects">
       <h2>Projects</h2>
       <p class="section-sub">Click a card for the full overview, technical details and links.</p>
-      <div class="project-grid" id="project-grid"></div>
+      <div id="project-groups"></div>
     </section>
 
     <section class="section" id="skills" data-section="skills">
@@ -92,7 +89,7 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; <span id="year"></span> <span data-cfg="name">Jeri Juntunen</span></p>
+    <p>&copy; <span id="year"></span> <span data-cfg="name">Your Name</span></p>
   </footer>
 
   <!-- PROJECT DETAIL OVERLAY -->
