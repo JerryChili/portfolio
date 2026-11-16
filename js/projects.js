@@ -28,35 +28,36 @@ window.PROJECTS = [
   {
     id: "steam-demo",
     category: "shipped",
-    title: "Your Steam Game",
-    hook: "One sentence that makes someone want to play it.",
+    title: "Ave Goddess",
+    hook: "Ave Goddess is a fantasy action roguelike where you play as Einar, an envoy for an enraged god.",
     status: "Steam Demo",
     role: "Gameplay Programmer",
     engine: "Unity",
     language: "C#",
     tags: ["Steam", "Team project"],
-    thumb: "",
+    thumb: "assets/projects/ave-goddess-thumbnail.jpg",
     preview: "",
     media: { type: "image", src: "" },
     year: "2026",
-    team: "Team of 4",
-    duration: "6 months",
+    team: "Team of 13",
+    duration: "3 months",
     overview: [
-      "Describe the game: genre, core loop, and what makes it interesting.",
-      "Describe the project's story: how it started, where it shipped, what you learned."
+      "Fight through one enemy filled room after another by casting spells using an unique system where you play a quick time event minigame to determine the strength of your spell.",
+      "Ave Goddess started as a very ambitious idea for the Summer Studies 2026 course in Kajaani University of Applied Sciences."
     ],
     responsibilities: [
-      "Player controller and movement feel",
-      "Ability / combat system",
-      "Steam integration and build pipeline"
+      "Code lead",
+      "Version control lead",
+      "Combat and Spellcasting system",
+      "Player controller and movement feel"
     ],
     technical: [
-      { title: "Example: Ability system", text: "Data-driven abilities using ScriptableObjects so designers can add new ones without code." },
-      { title: "Example: Input buffering", text: "Buffered inputs and coyote time to make platforming feel responsive." }
+      { title: "Code lead", text: "Managing a team of three programmers, setting coding standards and making sure they are followed, assisting other programmers where needed, and making sure code is sustainable." },
+      { title: "Version control lead", text: "Educating the team on how to use Git, GitHub desktop, and how to develop the project in a version control environment while avoiding issues."},
+      { title: "Spellcasting system", text: "Fully custom QTE -based minigame system where spells gain power dynamically based on the users success." }
     ],
     links: [
-      { label: "Play the demo on Steam", url: "https://store.steampowered.com/", primary: true },
-      { label: "Source code", url: "https://github.com/" }
+      { label: "Play the demo on Steam", url: "https://store.steampowered.com/app/4915090/Ave_Goddess/", primary: true }
     ]
   },
   {
