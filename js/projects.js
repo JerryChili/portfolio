@@ -63,25 +63,27 @@ window.PROJECTS = [
   {
     id: "jam-game",
     category: "other",
-    title: "Your Game Jam Entry",
-    hook: "Built in 48 hours around the theme of ...",
+    title: "Under Its Management",
+    hook: "Built in 36 hours around the theme of \"Beneath\"",
     status: "Game Jam",
     role: "Programmer",
     engine: "Unity",
     language: "C#",
-    tags: ["48h", "Solo"],
-    thumb: "",
+    tags: ["36h", "Duo"],
+    thumb: "assets/projects/assembly-game-thumbnail.jpg",
     preview: "",
     media: { type: "image", src: "" },
-    year: "2025",
-    team: "Solo",
+    year: "2026",
+    team: "2",
     duration: "48 hours",
-    overview: ["What you made, and how you scoped it to fit the jam."],
+    overview: ["Under Its Management was an idea that was born for the Assembly 2026 event where the theme was \"Beneath\". In this game we explore what it's like to be the bottom most person in the social hierarchy."],
     responsibilities: ["Everything: design, code, and audio integration"],
     technical: [
-      { title: "Example: Procedural level layout", text: "Short explanation of the interesting system." }
+      { title: "Task and Quota system", text: "Main gameloop of the game. You get office-related tasks that you must complete to fill a quota in the given time." },
+      { title: "Anger system", text: "Failing to complete tasks in the given time will make the BOSS angry. On maximum anger, he will exit his office and begin hunting you down personally." },
+      { title: "The BOSS", text: "The main antagonist. He will pathfind towards the player, always knowing where they are." }
     ],
-    links: [{ label: "Play on itch.io", url: "https://itch.io/", primary: true }]
+    links: [{ label: "Play on itch.io", url: "https://kaspianseppanen.itch.io/under-its-management", primary: true }]
   },
   {
     id: "itch-prototype",
